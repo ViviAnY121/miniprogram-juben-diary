@@ -1,0 +1,166 @@
+.page {
+  padding-bottom: 40rpx;
+}
+
+.month-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0 8rpx;
+}
+
+.nav-btn {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #6c5ce7;
+}
+
+.month-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin: 0 30rpx;
+  color: #2c2c3a;
+}
+
+.month-summary {
+  text-align: center;
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 16rpx;
+}
+
+.highlight {
+  color: #6c5ce7;
+  font-weight: 600;
+}
+
+.week-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10rpx;
+}
+
+.week-cell {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: #aaa;
+  padding: 8rpx 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0 8rpx;
+}
+
+/* 整个格子都是点击热区，点击空白/日期数字都进入“添加海报”流程 */
+.day-cell {
+  width: 14.2857%;
+  height: 208rpx;
+  box-sizing: border-box;
+  padding: 4rpx;
+  position: relative;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-cell.is-today {
+  background: #f1effe;
+}
+
+.day-cell.is-today .day-number {
+  color: #6c5ce7;
+  font-weight: 700;
+}
+
+.day-number {
+  font-size: 24rpx;
+  text-align: center;
+  color: #333;
+  padding: 4rpx 0 6rpx;
+  flex-shrink: 0;
+}
+
+.out-month .day-number {
+  color: #ccc;
+}
+
+/* 海报铺满日期下方剩余空间 */
+.poster-fill {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.poster-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.poster-img.gray {
+  filter: grayscale(1);
+  opacity: 0.75;
+}
+
+.more-badge {
+  position: absolute;
+  right: 4rpx;
+  bottom: 4rpx;
+  background: rgba(108, 92, 231, 0.85);
+  color: #fff;
+  font-size: 18rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 16rpx;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.add-popup {
+  width: 560rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 44rpx 36rpx;
+  text-align: center;
+}
+
+.add-popup-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2c2c3a;
+}
+
+.add-popup-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin: 12rpx 0 32rpx;
+}
+
+.add-btn {
+  width: 100%;
+}
+
+.add-popup-cancel {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: #999;
+}

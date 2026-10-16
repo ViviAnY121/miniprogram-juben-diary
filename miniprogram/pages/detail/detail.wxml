@@ -1,0 +1,198 @@
+<view class="page">
+  <!-- 海报 -->
+  <view class="poster-section">
+    <image
+      class="poster-img {{form.isPending ? 'gray' : ''}}"
+      src="{{posterDisplayUrl}}"
+      mode="aspectFill"
+      bindtap="onTapPosterImg"
+    />
+    <view class="poster-edit-tip" wx:if="{{editable}}">点击更换海报</view>
+  </view>
+
+  <view class="card">
+    <!-- 剧本名称 -->
+    <view class="form-row">
+      <view class="form-label">剧本名称</view>
+      <input
+        class="form-input"
+        placeholder="请输入剧本名称"
+        value="{{form.scriptName}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="scriptName"
+      />
+    </view>
+
+    <!-- 日期 -->
+    <view class="form-row">
+      <view class="form-label">日期</view>
+      <picker mode="date" value="{{form.date}}" bindchange="onDateChange" disabled="{{!editable}}">
+        <view class="form-picker">{{form.date || '请选择日期'}}</view>
+      </picker>
+    </view>
+
+    <!-- 体验角色 -->
+    <view class="form-row">
+      <view class="form-label">体验角色</view>
+      <input
+        class="form-input"
+        placeholder="请输入体验角色"
+        value="{{form.character}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="character"
+      />
+    </view>
+
+    <!-- 地点 -->
+    <view class="form-row">
+      <view class="form-label">地点</view>
+      <input
+        class="form-input"
+        placeholder="请输入地点"
+        value="{{form.location}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="location"
+      />
+    </view>
+
+    <!-- DM：支持多个 -->
+    <view class="form-block">
+      <view class="flex-between form-block-title">
+        <text class="form-label" style="width:auto;">DM</text>
+        <text class="add-link" wx:if="{{editable}}" bindtap="addDM">+ 添加DM</text>
+      </view>
+      <view class="dm-row" wx:for="{{form.dmList}}" wx:key="index" wx:for-index="idx">
+        <input
+          class="form-input dm-input"
+          placeholder="第{{idx + 1}}位DM姓名"
+          value="{{item}}"
+          disabled="{{!editable}}"
+          bindinput="onDmInput"
+          data-index="{{idx}}"
+        />
+        <view class="dm-remove" wx:if="{{editable && form.dmList.length > 1}}" bindtap="removeDM" data-index="{{idx}}">×</view>
+      </view>
+    </view>
+
+    <!-- 未定日程 -->
+    <view class="form-row">
+      <view class="form-label">未定日程</view>
+      <switch checked="{{form.isPending}}" disabled="{{!editable}}" bindchange="onPendingChange" color="#6c5ce7" />
+    </view>
+    <view class="form-tip" wx:if="{{form.isPending}}">未定日程的海报将以黑白展示</view>
+
+    <!-- 剧本金额 -->
+    <view class="form-row">
+      <view class="form-label">剧本金额</view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="0"
+        value="{{form.fee}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="fee"
+      />
+    </view>
+
+    <!-- 夜场费 -->
+    <view class="form-row">
+      <view class="form-label">夜场费</view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="0"
+        value="{{form.nightFee}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="nightFee"
+      />
+    </view>
+
+    <!-- 日场费 -->
+    <view class="form-row">
+      <view class="form-label">日场费</view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="0"
+        value="{{form.dayFee}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="dayFee"
+      />
+    </view>
+
+    <!-- 是否有补贴 -->
+    <view class="form-row">
+      <view class="form-label">有补贴/倒贴</view>
+      <switch checked="{{form.hasSubsidy}}" disabled="{{!editable}}" bindchange="onSubsidyToggle" color="#6c5ce7" />
+    </view>
+    <view class="form-row" wx:if="{{form.hasSubsidy}}">
+      <view class="form-label">补贴金额</view>
+      <input
+        class="form-input"
+        placeholder="正数=补贴收入，负数=倒贴支出"
+        value="{{form.subsidyAmount}}"
+        disabled="{{!editable}}"
+        bindinput="onSignedInput"
+        data-field="subsidyAmount"
+      />
+    </view>
+
+    <!-- 其他金额 -->
+    <view class="form-row">
+      <view class="form-label">其他金额</view>
+      <input
+        class="form-input"
+        placeholder="可正可负，如车费/道具费"
+        value="{{form.otherAmount}}"
+        disabled="{{!editable}}"
+        bindinput="onSignedInput"
+        data-field="otherAmount"
+      />
+    </view>
+    <view class="form-row" wx:if="{{form.otherAmount}}">
+      <view class="form-label">其他金额备注</view>
+      <input
+        class="form-input"
+        placeholder="说明这笔其他金额是什么"
+        value="{{form.otherRemark}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="otherRemark"
+      />
+    </view>
+
+    <!-- 总金额（自动计算） -->
+    <view class="form-row total-row">
+      <view class="form-label">总金额</view>
+      <view class="total-value">¥{{totalDisplay}}</view>
+    </view>
+    <view class="form-tip">总金额 = 剧本金额 + 补贴金额 + 其他金额 + 夜场费 + 日场费</view>
+
+    <!-- 备注 -->
+    <view class="form-row form-row-textarea">
+      <view class="form-label">备注</view>
+      <textarea
+        class="form-textarea"
+        placeholder="写点心得吧..."
+        value="{{form.remark}}"
+        disabled="{{!editable}}"
+        bindinput="onInput"
+        data-field="remark"
+        maxlength="500"
+      />
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-bar">
+    <button wx:if="{{mode === 'view' && !editable}}" class="btn-primary action-btn" bindtap="onEnableEdit">编辑</button>
+    <button wx:if="{{mode === 'view' && !editable}}" class="btn-danger action-btn" bindtap="onDelete">删除</button>
+    <button wx:if="{{editable}}" class="btn-primary action-btn" bindtap="onSave">保存</button>
+  </view>
+</view>

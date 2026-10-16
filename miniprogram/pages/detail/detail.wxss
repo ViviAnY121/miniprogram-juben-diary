@@ -1,0 +1,144 @@
+.page {
+  padding-bottom: 160rpx;
+}
+
+.poster-section {
+  width: 100%;
+  height: 480rpx;
+  position: relative;
+  background: #eee;
+}
+
+.poster-img {
+  width: 100%;
+  height: 100%;
+}
+
+.poster-img.gray {
+  filter: grayscale(1);
+}
+
+.poster-edit-tip {
+  position: absolute;
+  bottom: 16rpx;
+  right: 20rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.form-row-textarea {
+  align-items: flex-start;
+}
+
+.form-label {
+  width: 160rpx;
+  color: #666;
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+
+.form-input {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #2c2c3a;
+}
+
+.form-picker {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #2c2c3a;
+}
+
+.form-textarea {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #2c2c3a;
+  min-height: 120rpx;
+}
+
+.form-tip {
+  font-size: 22rpx;
+  color: #bbb;
+  padding: 4rpx 0 8rpx;
+}
+
+.form-block {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.form-block-title {
+  padding-bottom: 12rpx;
+}
+
+.add-link {
+  color: #6c5ce7;
+  font-size: 26rpx;
+}
+
+.dm-row {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.dm-input {
+  flex: 1;
+  text-align: left;
+  background: #f7f7fa;
+  border-radius: 10rpx;
+  padding: 12rpx 16rpx;
+  font-size: 26rpx;
+}
+
+.dm-remove {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 44rpx;
+  text-align: center;
+  color: #e74c3c;
+  font-size: 32rpx;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+}
+
+.total-row {
+  border-bottom: none;
+}
+
+.total-value {
+  flex: 1;
+  text-align: right;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #6c5ce7;
+}
+
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 30rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.action-btn {
+  flex: 1;
+}

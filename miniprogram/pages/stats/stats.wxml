@@ -1,0 +1,73 @@
+<view class="page">
+  <view class="tab-row">
+    <view class="tab-item {{activeTab === 'monthly' ? 'active' : ''}}" bindtap="switchTab" data-tab="monthly">年度趋势</view>
+    <view class="tab-item {{activeTab === 'script' ? 'active' : ''}}" bindtap="switchTab" data-tab="script">剧本排行</view>
+    <view class="tab-item {{activeTab === 'dm' ? 'active' : ''}}" bindtap="switchTab" data-tab="dm">DM排行</view>
+  </view>
+
+  <!-- 页面一：年度月度趋势 -->
+  <view wx:if="{{activeTab === 'monthly'}}">
+    <view class="year-header">
+      <view class="nav-btn" bindtap="prevYear">‹</view>
+      <view class="year-title">{{year}} 年</view>
+      <view class="nav-btn" bindtap="nextYear">›</view>
+    </view>
+
+    <view class="legend-row">
+      <view class="legend-item"><view class="dot dot-purple"></view>打本次数</view>
+      <view class="legend-item"><view class="dot dot-orange"></view>总花费(元)</view>
+    </view>
+
+    <view class="card chart-card">
+      <canvas type="2d" id="lineChart" class="line-chart"></canvas>
+      <view wx:if="{{!hasYearData}}" class="empty-tip">今年还没有打本记录</view>
+    </view>
+
+    <view class="card summary-card">
+      <view class="flex-between">
+        <text>本年度总场次</text>
+        <text class="summary-value">{{yearTotalCount}} 场</text>
+      </view>
+      <view class="flex-between">
+        <text>本年度总花费</text>
+        <text class="summary-value">¥{{yearTotalAmount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面二：按剧本统计 -->
+  <view wx:if="{{activeTab === 'script'}}">
+    <view class="section-title">剧本排行（按打本次数）</view>
+    <view class="card" wx:if="{{scriptRanking.length === 0}}">
+      <view class="empty-tip">暂无数据</view>
+    </view>
+    <view class="rank-list" wx:else>
+      <view class="rank-item" wx:for="{{scriptRanking}}" wx:key="name">
+        <view class="rank-index rank-{{index < 3 ? index : 'n'}}">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name">{{item.name}}</view>
+          <view class="rank-sub">共花费 ¥{{item.amount}}</view>
+        </view>
+        <view class="rank-count">{{item.count}} 次</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面三：按DM统计 -->
+  <view wx:if="{{activeTab === 'dm'}}">
+    <view class="section-title">DM排行（按合作次数）</view>
+    <view class="card" wx:if="{{dmRanking.length === 0}}">
+      <view class="empty-tip">暂无数据</view>
+    </view>
+    <view class="rank-list" wx:else>
+      <view class="rank-item" wx:for="{{dmRanking}}" wx:key="name">
+        <view class="rank-index rank-{{index < 3 ? index : 'n'}}">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name">{{item.name}}</view>
+          <view class="rank-sub">合计花费 ¥{{item.amount}}</view>
+        </view>
+        <view class="rank-count">{{item.count}} 次</view>
+      </view>
+    </view>
+  </view>
+</view>

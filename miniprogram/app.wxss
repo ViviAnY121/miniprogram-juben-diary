@@ -1,0 +1,66 @@
+/**app.wxss**/
+page {
+  background: #f5f5f7;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  font-family: 'HuiwenMincho', -apple-system, 'PingFang SC', 'Microsoft Yahei', serif;
+}
+
+/* view/text 默认会继承 page 的 font-family，但 input/textarea/button 等原生组件
+   在部分机型上不会自动继承，这里显式指定一遍 */
+input,
+textarea,
+button,
+picker {
+  font-family: 'HuiwenMincho', -apple-system, 'PingFang SC', 'Microsoft Yahei', serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  padding: 24rpx;
+  margin: 20rpx;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+}
+
+.btn-danger {
+  background: #fff0f0;
+  color: #e74c3c;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2c2c3a;
+  margin: 20rpx 20rpx 10rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #bbb;
+  padding: 80rpx 0;
+  font-size: 26rpx;
+}

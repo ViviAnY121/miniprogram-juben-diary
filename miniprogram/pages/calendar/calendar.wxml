@@ -1,0 +1,56 @@
+<view class="page">
+  <!-- 年月切换头 -->
+  <view class="month-header">
+    <view class="nav-btn" bindtap="prevMonth">‹</view>
+    <picker mode="date" fields="month" value="{{pickerValue}}" bindchange="onYearMonthChange">
+      <view class="month-title">{{year}}年{{month}}月</view>
+    </picker>
+    <view class="nav-btn" bindtap="nextMonth">›</view>
+  </view>
+
+  <!-- 本月汇总 -->
+  <view class="month-summary">
+    本月已打 <text class="highlight">{{monthCount}}</text> 本 · 总花费 <text class="highlight">¥{{monthAmount}}</text>
+  </view>
+
+  <!-- 星期表头 -->
+  <view class="week-row">
+    <view class="week-cell" wx:for="{{weekDays}}" wx:key="*this">{{item}}</view>
+  </view>
+
+  <!-- 日期格子：整个格子可点击进入添加流程，海报本身可点击查看详情 -->
+  <view class="grid">
+    <view
+      class="day-cell {{item.inMonth ? '' : 'out-month'}} {{item.isToday ? 'is-today' : ''}}"
+      wx:for="{{cells}}"
+      wx:key="dateStr"
+      bindtap="onTapCell"
+      data-date="{{item.dateStr}}"
+    >
+      <view class="day-number">{{item.day}}</view>
+
+      <view class="poster-fill" wx:if="{{item.records && item.records.length > 0}}">
+        <image
+          class="poster-img {{item.records[0].isPending ? 'gray' : ''}}"
+          src="{{item.records[0].tempUrl}}"
+          mode="aspectFill"
+          catchtap="onTapPoster"
+          data-id="{{item.records[0]._id}}"
+        />
+        <view class="more-badge" wx:if="{{item.records.length > 1}}">×{{item.records.length}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty-tip">加载中...</view>
+
+  <!-- 添加弹窗 -->
+  <view class="mask" wx:if="{{showAddPopup}}" bindtap="closeAddPopup">
+    <view class="add-popup" catchtap="noop">
+      <view class="add-popup-title">{{addPopupDate}}</view>
+      <view class="add-popup-desc">添加一条打本记录</view>
+      <button class="btn-primary add-btn" bindtap="onChoosePoster">选择剧本海报</button>
+      <view class="add-popup-cancel" bindtap="closeAddPopup">取消</view>
+    </view>
+  </view>
+</view>
